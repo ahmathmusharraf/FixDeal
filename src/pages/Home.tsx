@@ -50,7 +50,7 @@ const Hero = () => {
               Explore Deals <ArrowRight className="w-5 h-5" />
             </Link>
             <Link to="/sell" className="bg-transparent border border-white/30 text-white px-8 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all active:scale-95">
-              Sell Your Car
+              Sell Your Items
             </Link>
           </div>
 
@@ -61,7 +61,7 @@ const Hero = () => {
             <input
               type="text"
               className="block w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all backdrop-blur-md"
-              placeholder="Search for cars, brands, or models..."
+              placeholder="Search for phones, electronics, vehicles, or motorcycles..."
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   navigate(`/buy?q=${(e.target as HTMLInputElement).value}`);
@@ -110,7 +110,7 @@ const Hero = () => {
               </div>
               <span className="font-bold text-sm text-brand-dark">Verified Deals</span>
             </div>
-            <p className="text-xs text-zinc-500">All cars undergo a 150-point inspection.</p>
+            <p className="text-xs text-zinc-500">All items undergo verified condition inspections.</p>
           </div>
           <div className="absolute -top-6 -right-6 bg-white text-brand-dark p-6 rounded-3xl shadow-xl z-20">
             <p className="text-3xl font-black">24/7</p>
@@ -160,7 +160,7 @@ const CarListings = () => {
         <div className="flex justify-between items-end mb-16">
           <div>
             <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.3em] mb-4">Curated Selection</p>
-            <h2 className="font-display text-5xl font-black tracking-tight">Super Car Deals</h2>
+            <h2 className="font-display text-5xl font-black tracking-tight">Trending Items</h2>
           </div>
           <Link to="/buy" className="hidden md:flex items-center gap-2 text-zinc-400 text-sm font-bold hover:text-brand-dark transition-colors group">
             Slide to see more <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -327,8 +327,8 @@ const About = () => {
           </div>
           <div className="mt-10 grid grid-cols-2 gap-8">
             <div>
-              <p className="text-2xl font-bold text-zinc-900 mb-1">5000+</p>
-              <p className="text-sm text-zinc-500">Cars Sold</p>
+              <p className="text-2xl font-bold text-zinc-900 mb-1">10k+</p>
+              <p className="text-sm text-zinc-500">Deals Completed</p>
             </div>
             <div>
               <p className="text-2xl font-bold text-zinc-900 mb-1">98%</p>
