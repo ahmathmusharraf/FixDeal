@@ -1,70 +1,86 @@
 import React, { useState } from 'react';
-import { CAR_LISTINGS } from '../constants';
-import { CarCard } from '../components/CarCard';
-import { Search, Calendar, MapPin } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Key, Bell, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Rent = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
-  const filteredCars = CAR_LISTINGS.filter(car => 
-    car.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    car.model.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setIsSubscribed(true);
+    }
+  };
 
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-zinc-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-12">
-          <h1 className="font-display text-4xl font-bold mb-4">Rent Anything You Need</h1>
-          <p className="text-zinc-500">Premium rentals for every occasion. Experience the best in Sri Lanka.</p>
-        </div>
+    <div className="pt-32 pb-20 min-h-screen bg-zinc-50 flex items-center justify-center px-6">
+      <div className="max-w-xl w-full text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-zinc-100 relative overflow-hidden"
+        >
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full blur-2xl" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-brand-accent/5 rounded-full blur-2xl" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 bg-white p-4 md:p-6 rounded-[24px] md:rounded-[32px] shadow-sm border border-zinc-100">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 w-5 h-5" />
-            <input 
-              type="text" 
-              placeholder="Search brand..." 
-              className="w-full pl-12 pr-4 py-4 bg-zinc-50 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 transition-all"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+          <div className="w-20 h-20 bg-brand-dark/5 rounded-3xl flex items-center justify-center mx-auto mb-8">
+            <Key className="text-brand-dark w-10 h-10" />
           </div>
-          <div className="relative">
-            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 w-5 h-5" />
-            <input 
-              type="text" 
-              placeholder="Pick-up Date" 
-              className="w-full pl-12 pr-4 py-4 bg-zinc-50 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 transition-all"
-              onFocus={(e) => (e.target.type = 'date')}
-              onBlur={(e) => (e.target.type = 'text')}
-            />
-          </div>
-          <div className="relative">
-            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 w-5 h-5" />
-            <select className="w-full pl-12 pr-4 py-4 bg-zinc-50 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 transition-all appearance-none">
-              <option>Colombo</option>
-              <option>Kandy</option>
-              <option>Galle</option>
-              <option>Negombo</option>
-            </select>
-          </div>
-          <button className="bg-brand-dark text-white py-4 rounded-2xl font-bold hover:bg-brand-primary transition-all active:scale-95 shadow-xl shadow-brand-dark/20">
-            Search Rental
-          </button>
-        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredCars.map(car => (
-            <div key={car.id} className="relative group">
-              <CarCard car={car} />
-              <div className="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                Available
-              </div>
-            </div>
-          ))}
-        </div>
+          <span className="inline-block px-4 py-1.5 bg-brand-dark/10 text-brand-dark text-xs font-black uppercase tracking-wider rounded-full mb-6">
+            Rentals Feature
+          </span>
+
+          <h1 className="font-display text-4xl md:text-5xl font-extrabold text-zinc-900 mb-4 leading-tight">
+            Coming Soon
+          </h1>
+          
+          <p className="text-zinc-500 mb-8 leading-relaxed max-w-md mx-auto text-sm md:text-base">
+            We are working hard to bring Sri Lanka's premium and most trusted renting network for Vehicles, High-End Electronics, and Motorcycles. Stay tuned!
+          </p>
+
+          {isSubscribed ? (
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="bg-emerald-50 border border-emerald-100 p-4 rounded-2xl flex items-center gap-3 text-emerald-800 text-sm font-semibold max-w-sm mx-auto justify-center"
+            >
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+              You've subscribed! We'll notify you.
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8">
+              <input
+                required
+                type="email"
+                placeholder="Enter your email to get notified..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-grow px-5 py-3.5 bg-zinc-50 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 text-sm"
+              />
+              <button
+                type="submit"
+                className="bg-brand-dark hover:bg-brand-primary text-white font-bold px-6 py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 text-sm shrink-0"
+              >
+                <Bell className="w-4 h-4" /> Notify Me
+              </button>
+            </form>
+          )}
+
+          <div className="border-t border-zinc-100 pt-8 flex justify-center">
+            <Link 
+              to="/" 
+              className="flex items-center gap-2 text-zinc-500 hover:text-brand-dark transition-colors font-bold text-sm"
+            >
+              <ArrowLeft className="w-4 h-4" /> Go Back to Home
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
 };
+
