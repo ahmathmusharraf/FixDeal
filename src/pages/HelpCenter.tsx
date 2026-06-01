@@ -4,20 +4,20 @@ import { HelpCircle, Book, MessageSquare, Shield } from 'lucide-react';
 export const HelpCenter = () => {
   const faqs = [
     {
-      question: "How do I buy a car on Let's Deal?",
-      answer: "Browse our inventory, select a car you like, and click 'Call' or 'Chat' to connect with our sales team. We'll guide you through the viewing, inspection, and documentation process."
+      question: "How do I buy an item on Let's Deal?",
+      answer: "Browse our marketplace, select any item you like (Mobile Phones, Electronics, Vehicles, or Motorcycles), and click 'Call' or 'Chat' to connect with the seller's representatives. We'll guide you through the viewing, inspection, and safe delivery/pickup process."
     },
     {
       question: "Is the pricing transparent?",
-      answer: "Yes, all prices listed are inclusive of VAT where applicable. We believe in honest pricing with no hidden fees."
+      answer: "Yes, all prices listed are straight and inclusive of all applicable local charges. There are absolutely no hidden fees."
     },
     {
-      question: "Do you offer financing options?",
-      answer: "We work with several leading banks in the UAE to help you secure the best financing rates for your vehicle purchase."
+      question: "Is payment secure?",
+      answer: "We ensure safe dealings. All premium or verified transactions have secure payment protections on delivery, bringing peace of mind to both parties."
     },
     {
-      question: "What is 'Fulfilled by LD'?",
-      answer: "Cars with this badge have been thoroughly inspected by our team, verified for quality, and are managed directly by Let's Deal for a smoother transaction."
+      question: "What is 'Fulfilled by FD'?",
+      answer: "Items with this badge are stored, inspected for genuine specifications, and packaged or delivered directly via FD courier partners for absolute guarantee."
     }
   ];
 
