@@ -19,6 +19,7 @@ export interface CarListing {
   image: string;
   logo: string;
   fulfilledByFD: boolean;
+  category: 'Mobile Phone' | 'Electronics' | 'Vehicle' | 'Motorcycle';
 }
 
 export const SERVICES: Service[] = [
@@ -27,7 +28,7 @@ export const SERVICES: Service[] = [
     title: 'Buy Items',
     description: 'Explore the best deals in the island with transparent pricing.',
     icon: 'ShoppingBag',
-    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=800',
     color: 'emerald'
   },
   {
@@ -59,86 +60,90 @@ export const SERVICES: Service[] = [
 export const CAR_LISTINGS: CarListing[] = [
   {
     id: '1',
-    brand: 'Lamborghini',
-    model: 'Huracan',
-    trim: 'Perfomante',
-    year: 2018,
-    mileage: 69000,
-    price: 855000,
-    spec: 'GCC',
-    image: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=800',
-    logo: 'https://www.carlogos.org/car-logos/lamborghini-logo-1000x1100.png',
-    fulfilledByFD: true
+    brand: 'Apple',
+    model: 'iPhone 15 Pro Max',
+    trim: '256GB Titanium',
+    year: 2023,
+    mileage: 98,
+    price: 345000,
+    spec: 'Sri Lankan ZP/A / Physical Dual SIM',
+    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&q=80&w=800',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg',
+    fulfilledByFD: true,
+    category: 'Mobile Phone'
   },
   {
     id: '2',
-    brand: 'Lamborghini',
-    model: 'Huracan',
-    trim: 'Spyder',
-    year: 2017,
-    mileage: 78000,
-    price: 655000,
-    spec: 'GCC',
-    image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800',
-    logo: 'https://www.carlogos.org/car-logos/lamborghini-logo-1000x1100.png',
-    fulfilledByFD: true
+    brand: 'Sony',
+    model: 'PlayStation 5 Slim',
+    trim: '1TB SSD Disc Edition',
+    year: 2024,
+    mileage: 100,
+    price: 185000,
+    spec: 'Brand New Sealed with 1 Year Warranty',
+    image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&q=80&w=800',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg',
+    fulfilledByFD: true,
+    category: 'Electronics'
   },
   {
     id: '3',
-    brand: 'BMW',
-    model: '7 series',
-    trim: 'Alpina B7',
-    year: 2017,
-    mileage: 92000,
-    price: 288000,
-    spec: 'GCC',
-    image: 'https://images.unsplash.com/photo-1556122071-e404be745793?auto=format&fit=crop&q=80&w=800',
-    logo: 'https://www.carlogos.org/car-logos/bmw-logo-2020-blue-white.png',
-    fulfilledByFD: true
+    brand: 'Toyota',
+    model: 'Land Cruiser Prado',
+    trim: 'TX L Package',
+    year: 2020,
+    mileage: 48000,
+    price: 46500000,
+    spec: 'Pearl White / Petrol / Leather / Sunroof',
+    image: 'https://images.unsplash.com/photo-1594568280292-02f64ff4e819?auto=format&fit=crop&q=80&w=800',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Toyota_EU.svg',
+    fulfilledByFD: true,
+    category: 'Vehicle'
   },
   {
     id: '4',
-    brand: 'Ferrari',
-    model: '488',
-    trim: 'Spider',
-    year: 2019,
-    mileage: 12000,
-    price: 950000,
-    spec: 'GCC',
-    image: 'https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&q=80&w=800',
-    logo: 'https://www.carlogos.org/car-logos/ferrari-logo-750x1100.png',
-    fulfilledByFD: true
+    brand: 'Yamaha',
+    model: 'YZF-R1',
+    trim: 'Monster Energy Edition',
+    year: 2022,
+    mileage: 6500,
+    price: 8400000,
+    spec: '1000cc / Quickshifter / Akrapovic Exhaust',
+    image: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=800',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/Yamaha_logo.svg',
+    fulfilledByFD: true,
+    category: 'Motorcycle'
   },
   {
     id: '5',
-    brand: 'Mercedes-Benz',
-    model: 'G-Class',
-    trim: 'G63 AMG',
-    year: 2022,
-    mileage: 5000,
-    price: 1250000,
-    spec: 'GCC',
-    image: 'https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&fit=crop&q=80&w=800',
-    logo: 'https://www.carlogos.org/car-logos/mercedes-benz-logo-2011-silver.png',
-    fulfilledByFD: true
+    brand: 'Samsung',
+    model: 'Galaxy S24 Ultra',
+    trim: '512GB Titanium Gray',
+    year: 2024,
+    mileage: 99,
+    price: 325000,
+    spec: 'TRCSL Approved with Samsung Care+',
+    image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&q=80&w=800',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg',
+    fulfilledByFD: true,
+    category: 'Mobile Phone'
   },
   {
     id: '6',
-    brand: 'Audi',
-    model: 'R8',
-    trim: 'V10 Performance',
-    year: 2021,
-    mileage: 8000,
-    price: 580000,
-    spec: 'GCC',
-    image: 'https://images.unsplash.com/photo-1603553329412-ad49c17b050e?auto=format&fit=crop&q=80&w=800',
-    logo: 'https://www.carlogos.org/car-logos/audi-logo-2016.png',
-    fulfilledByFD: true
+    brand: 'Sony',
+    model: 'WH-1000XM5 ANC',
+    trim: 'Wireless Headphones',
+    year: 2023,
+    mileage: 95,
+    price: 110000,
+    spec: 'Silver Edition / Noise Canceling Active',
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg',
+    fulfilledByFD: true,
+    category: 'Electronics'
   }
 ];
 
 export const BRANDS = [
-  'Toyota', 'Nissan', 'Ford', 'Hyundai', 'Mercedes', 'BMW', 'Audi', 'Porsche', 
-  'Suzuki', 'Honda', 'Fiat', 'Skoda', 'Jeep', 'Mitsubishi', 'Mini Cooper', 
-  'Chevrolet', 'Volkswagen'
+  'Apple', 'Samsung', 'Sony', 'Toyota', 'Honda', 'Yamaha', 'Suzuki', 'Nissan', 'Xiaomi', 'LG', 'Asus', 'HP'
 ];
