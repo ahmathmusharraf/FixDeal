@@ -76,8 +76,24 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           <p className="text-zinc-400 text-xs font-medium mb-3">{car.spec}</p>
           
           <div className="flex gap-4 text-zinc-500 text-xs font-semibold mb-6">
-            <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {car.year}</span>
-            <span className="flex items-center gap-1"><Gauge className="w-3 h-3" /> {car.mileage.toLocaleString()} KM</span>
+            <span className="flex items-center gap-1">
+              <Calendar className="w-3 h-3" /> {car.year}
+            </span>
+            <span className="flex items-center gap-1">
+              {car.category === 'Mobile Phone' ? (
+                <>
+                  <Gauge className="w-3 h-3" /> {car.mileage}% Battery
+                </>
+              ) : car.category === 'Electronics' ? (
+                <>
+                  <Gauge className="w-3 h-3" /> {car.mileage}% Condition
+                </>
+              ) : (
+                <>
+                  <Gauge className="w-3 h-3" /> {car.mileage.toLocaleString()} KM
+                </>
+              )}
+            </span>
           </div>
 
           <div className="mt-auto">
@@ -159,8 +175,12 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
                       <p className="font-bold text-sm">{car.year}</p>
                     </div>
                     <div className="bg-zinc-50 p-4 rounded-2xl">
-                      <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mb-1">Mileage</p>
-                      <p className="font-bold text-sm">{car.mileage.toLocaleString()} KM</p>
+                      <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mb-1">
+                        {car.category === 'Mobile Phone' ? 'Battery' : car.category === 'Electronics' ? 'Condition' : 'Mileage'}
+                      </p>
+                      <p className="font-bold text-sm">
+                        {car.category === 'Mobile Phone' ? `${car.mileage}% Health` : car.category === 'Electronics' ? `${car.mileage}% Condition` : `${car.mileage.toLocaleString()} KM`}
+                      </p>
                     </div>
                   </div>
 
