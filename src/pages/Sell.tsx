@@ -108,7 +108,7 @@ export const Sell = () => {
             {[
               { icon: DollarSign, title: 'Best Market Price', desc: 'We offer competitive prices based on real-time market data.' },
               { icon: ShieldCheck, title: 'Safe & Secure', desc: 'Verified transactions and secure payment on delivery.' },
-              { icon: Clock, title: 'Quick Process', desc: 'Get an offer within 24 hours and sell your car in days.' }
+              { icon: Clock, title: 'Quick Process', desc: 'Get an offer within 24 hours and sell your items in days.' }
             ].map((item, i) => (
               <div key={i} className="flex gap-6">
                 <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center shrink-0">
