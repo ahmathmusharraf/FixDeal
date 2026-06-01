@@ -1,113 +1,86 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Wrench, ShieldCheck, Clock, CheckCircle2, Calendar, User, Mail, Phone } from 'lucide-react';
+import { Wrench, Bell, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Service = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    if (email.trim()) {
+      setIsSubscribed(true);
+    }
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="pt-40 pb-20 min-h-screen bg-zinc-50 flex items-center justify-center px-6">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="max-w-md w-full bg-white p-12 rounded-[40px] shadow-xl text-center"
-        >
-          <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-8">
-            <CheckCircle2 className="text-emerald-600 w-10 h-10" />
-          </div>
-          <h2 className="text-3xl font-bold mb-4">Booking Confirmed!</h2>
-          <p className="text-zinc-500 mb-8 leading-relaxed">
-            Your service appointment has been scheduled. Our team will contact you shortly to confirm the details.
-          </p>
-          <button 
-            onClick={() => setIsSubmitted(false)}
-            className="w-full bg-brand-dark text-white py-4 rounded-2xl font-bold hover:bg-brand-primary transition-all active:scale-95"
-          >
-            Back to Home
-          </button>
-        </motion.div>
-      </div>
-    );
-  }
-
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-zinc-50">
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-start">
-        <div>
-          <h1 className="font-display text-5xl md:text-6xl font-extrabold leading-tight mb-8">
-            Expert <span className="text-brand-dark">services</span> you can trust
+    <div className="pt-32 pb-20 min-h-screen bg-zinc-50 flex items-center justify-center px-6">
+      <div className="max-w-xl w-full text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-zinc-100 relative overflow-hidden"
+        >
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full blur-2xl" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-brand-accent/5 rounded-full blur-2xl" />
+
+          <div className="w-20 h-20 bg-brand-dark/5 rounded-3xl flex items-center justify-center mx-auto mb-8">
+            <Wrench className="text-brand-dark w-10 h-10" />
+          </div>
+
+          <span className="inline-block px-4 py-1.5 bg-brand-dark/10 text-brand-dark text-xs font-black uppercase tracking-wider rounded-full mb-6">
+            Professional Services
+          </span>
+
+          <h1 className="font-display text-4xl md:text-5xl font-extrabold text-zinc-900 mb-4 leading-tight">
+            Coming Soon
           </h1>
-          <p className="text-lg text-zinc-600 mb-12 leading-relaxed">
-            From professional consultations to home services, our certified experts ensure you get the best experience in Sri Lanka.
+          
+          <p className="text-zinc-500 mb-8 leading-relaxed max-w-md mx-auto text-sm md:text-base">
+            We are curating Sri Lanka's finest team of certified inspectors, maintenance experts, and support staff to assist you. This feature will be live shortly!
           </p>
 
-          <div className="space-y-8">
-            {[
-              { icon: Wrench, title: 'Certified Technicians', desc: 'Expert mechanics with years of experience in luxury and supercars.' },
-              { icon: ShieldCheck, title: 'Genuine Parts', desc: 'We only use original manufacturer parts for all repairs and services.' },
-              { icon: Clock, title: 'Same-Day Service', desc: 'Most routine maintenance tasks are completed within the same day.' }
-            ].map((item, i) => (
-              <div key={i} className="flex gap-6">
-                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center shrink-0">
-                  <item.icon className="text-brand-dark w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-1">{item.title}</h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+          {isSubscribed ? (
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="bg-emerald-50 border border-emerald-100 p-4 rounded-2xl flex items-center gap-3 text-emerald-800 text-sm font-semibold max-w-sm mx-auto justify-center"
+            >
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+              You've subscribed! We'll notify you.
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8">
+              <input
+                required
+                type="email"
+                placeholder="Enter your email to get notified..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-grow px-5 py-3.5 bg-zinc-50 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 text-sm"
+              />
+              <button
+                type="submit"
+                className="bg-brand-dark hover:bg-brand-primary text-white font-bold px-6 py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 text-sm shrink-0"
+              >
+                <Bell className="w-4 h-4" /> Notify Me
+              </button>
+            </form>
+          )}
 
-        <div className="bg-white p-6 md:p-10 rounded-[32px] md:rounded-[40px] shadow-xl border border-zinc-100">
-          <h2 className="text-2xl font-bold mb-8">Book an Appointment</h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-zinc-700">Full Name</label>
-                <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
-                  <input required type="text" placeholder="John Doe" className="w-full pl-12 pr-4 py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20" />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-zinc-700">Phone Number</label>
-                <div className="relative">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
-                  <input required type="tel" placeholder="+94" className="w-full pl-12 pr-4 py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20" />
-                </div>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-zinc-700">Service Type</label>
-              <select className="w-full px-4 py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 appearance-none">
-                <option>Home Delivery</option>
-                <option>Professional Consultation</option>
-                <option>Technical Support</option>
-                <option>Installation Service</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-zinc-700">Preferred Date</label>
-              <div className="relative">
-                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
-                <input required type="date" className="w-full pl-12 pr-4 py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20" />
-              </div>
-            </div>
-            <button type="submit" className="w-full bg-brand-dark text-white py-4 rounded-2xl font-bold hover:bg-brand-primary transition-all active:scale-95 shadow-xl shadow-brand-dark/20">
-              Book Appointment
-            </button>
-          </form>
-        </div>
+          <div className="border-t border-zinc-100 pt-8 flex justify-center">
+            <Link 
+              to="/" 
+              className="flex items-center gap-2 text-zinc-500 hover:text-brand-dark transition-colors font-bold text-sm"
+            >
+              <ArrowLeft className="w-4 h-4" /> Go Back to Home
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
 };
+
