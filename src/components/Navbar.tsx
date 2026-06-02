@@ -31,13 +31,30 @@ export const Navbar = () => {
 
   const isHome = location.pathname === '/';
 
+  const isPathActive = (path: string) => {
+    const current = location.pathname;
+    if (path === '/buy') {
+      return current === '/buy' || current.startsWith('/category/') || current.startsWith('/ad/') || current.startsWith('/car/');
+    }
+    if (path === '/sell') {
+      return current === '/sell' || current === '/post-ad';
+    }
+    if (path === '/rent') {
+      return current === '/rent';
+    }
+    if (path === '/dashboard') {
+      return current === '/dashboard' || current.startsWith('/messages') || current.startsWith('/chat/') || current === '/admin' || current === '/login' || current === '/register';
+    }
+    return false;
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || !isHome ? 'glass-dark py-3 shadow-sm' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <div className="bg-white p-1 rounded-lg">
             <img 
-              src="https://raw.githubusercontent.com/ahmath-musharraf/FixDeal/refs/heads/main/Fix1.png" 
+              src="/logo.png" 
               alt="FIX DEAL Logo" 
               className="w-8 h-8 object-contain"
               referrerPolicy="no-referrer"
@@ -206,27 +223,34 @@ export const Navbar = () => {
       </AnimatePresence>
 
       {/* Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-6 pt-2 bg-gradient-to-t from-zinc-50 via-zinc-50/80 to-transparent pointer-events-none">
-        <div className="glass-dark rounded-[32px] p-1.5 shadow-2xl border border-white/10 flex items-center justify-around pointer-events-auto">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-3.5 pt-1.5 bg-gradient-to-t from-zinc-50/90 via-zinc-50/40 to-transparent pointer-events-none">
+        <div className="bg-[#1f1926]/95 backdrop-blur-lg rounded-[22px] p-1 shadow-2xl border border-white/10 flex items-center justify-around pointer-events-auto max-w-md mx-auto">
           {[
             { name: 'Buy', path: '/buy', icon: ShoppingBag },
             { name: 'Sell', path: '/sell', icon: DollarSign },
             { name: 'Rent', path: '/rent', icon: Key },
             { name: 'Profile', path: '/dashboard', icon: UserIcon }
           ].map((item) => {
-            const isActive = location.pathname === item.path;
+            const isActive = isPathActive(item.path);
             return (
               <motion.div
                 key={item.name}
-                whileTap={{ scale: 0.9 }}
-                className="flex-1"
+                whileTap={{ scale: 0.95 }}
+                className="flex-1 relative"
               >
                 <Link 
                   to={item.path} 
-                  className={`flex flex-col items-center gap-1 py-3 rounded-[24px] transition-all ${isActive ? 'bg-white text-brand-dark shadow-lg shadow-white/10' : 'text-zinc-400'}`}
+                  className={`flex flex-col items-center gap-0.5 py-2 px-1 rounded-xl transition-all duration-300 relative ${isActive ? 'text-white' : 'text-white/40 hover:text-white/60'}`}
                 >
-                  <item.icon className={`w-5 h-5 ${isActive ? 'fill-current' : ''}`} />
-                  <span className="text-[9px] font-black uppercase tracking-[0.1em]">{item.name}</span>
+                  <div className="relative">
+                    <item.icon className="w-4.5 h-4.5 transition-transform duration-300" strokeWidth={1.75} />
+                    {isActive && (
+                      <span className="absolute -top-0.5 -right-1 w-1.5 h-1.5 bg-emerald-400 rounded-full shadow-md shadow-emerald-400/80 animate-pulse" />
+                    )}
+                  </div>
+                  <span className={`text-[8px] uppercase tracking-[0.1em] transition-all duration-300 ${isActive ? 'font-black text-white' : 'font-semibold text-white/40'}`}>
+                    {item.name}
+                  </span>
                 </Link>
               </motion.div>
             );
