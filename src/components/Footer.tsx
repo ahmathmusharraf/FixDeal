@@ -18,7 +18,7 @@ export const Footer = () => {
             <Link to="/" className="flex items-center gap-2 mb-6">
               <div className="flex items-center justify-center">
                 <img 
-                  src="https://raw.githubusercontent.com/ahmathmusharraf/FixDeal/refs/heads/main/Fix1.png" 
+                  src="https://raw.githubusercontent.com/ahmathmusharraf/FixDeal/refs/heads/main/Fix2.png" 
                   alt="FIX DEAL Logo" 
                   className="w-9 h-9 object-contain"
                   referrerPolicy="no-referrer"
