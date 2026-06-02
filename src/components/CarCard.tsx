@@ -59,23 +59,23 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             <Eye className="w-3.5 h-3.5" /> Quick View
           </button>
         </div>
-        <div className="p-5 flex flex-col flex-grow">
+        <div className="p-3 sm:p-5 flex flex-col flex-grow">
           <div className="flex justify-between items-start mb-1">
             <Link to={`/car/${car.id}`} className="hover:text-brand-dark transition-colors">
-              <h3 className="font-display font-bold text-lg leading-tight">
+              <h3 className="font-display font-bold text-sm sm:text-lg leading-tight line-clamp-1">
                 {car.brand} {car.model}
               </h3>
             </Link>
             <img 
               src={car.logo} 
               alt={car.brand} 
-              className="w-6 h-6 object-contain opacity-80"
+              className="w-5 h-5 sm:w-6 sm:h-6 object-contain opacity-80"
               referrerPolicy="no-referrer"
             />
           </div>
-          <p className="text-zinc-400 text-xs font-medium mb-3">{car.spec}</p>
+          <p className="text-zinc-400 text-[10px] sm:text-xs font-medium mb-2 sm:mb-3 line-clamp-1">{car.spec}</p>
           
-          <div className="flex gap-4 text-zinc-500 text-xs font-semibold mb-6">
+          <div className="flex gap-2 sm:gap-4 text-zinc-500 text-[10px] sm:text-xs font-semibold mb-3 sm:mb-6">
             <span className="flex items-center gap-1">
               <Calendar className="w-3 h-3" /> {car.year}
             </span>
@@ -97,30 +97,30 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           </div>
 
           <div className="mt-auto">
-            <div className="flex items-center justify-between mb-4 gap-2">
-              <p className="text-2xl font-black text-brand-dark shrink-0">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 sm:mb-4 gap-1.5 sm:gap-2">
+              <p className="text-xs min-[380px]:text-sm sm:text-2xl font-black text-brand-dark shrink-0">
                 LKR {car.price.toLocaleString()}
               </p>
               {car.fulfilledByFD && (
-                <div className="flex items-center gap-1 text-[10px] font-bold text-brand-dark uppercase tracking-wider bg-brand-dark/5 px-2 py-1 rounded-lg border border-brand-dark/10">
-                  <ShieldCheck className="w-3 h-3" />
-                  <span className="whitespace-nowrap">Fulfilled by FD</span>
+                <div className="inline-flex items-center gap-0.5 sm:gap-1 text-[7.5px] sm:text-[10px] font-bold text-brand-dark uppercase tracking-wider bg-brand-dark/5 px-1.5 py-0.5 sm:py-1 rounded border border-brand-dark/10 self-start sm:self-auto">
+                  <ShieldCheck className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-emerald-500" />
+                  <span className="whitespace-nowrap">FD Verified</span>
                 </div>
               )}
             </div>
             
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
               <a 
                 href={`tel:+971502316225`}
-                className="bg-brand-dark text-white py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-brand-primary transition-colors"
+                className="bg-brand-dark text-white py-2 sm:py-2.5 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-xs flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-brand-primary transition-colors"
               >
-                <Phone className="w-3.5 h-3.5 fill-current" /> CALL
+                <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" /> CALL
               </a>
               <button 
                 onClick={() => window.open('https://wa.me/971502316225', '_blank')}
-                className="bg-brand-dark text-white py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-brand-primary transition-colors"
+                className="bg-brand-dark text-white py-2 sm:py-2.5 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-xs flex items-center justify-center gap-1.5 sm:gap-2 hover:bg-brand-primary transition-colors"
               >
-                <MessageCircle className="w-3.5 h-3.5 fill-current" /> CHAT
+                <MessageCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" /> CHAT
               </button>
             </div>
           </div>
