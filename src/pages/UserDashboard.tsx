@@ -70,11 +70,64 @@ export const UserDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-20 bg-zinc-50 px-6">
+    <div className="min-h-screen pt-12 pb-16 lg:pt-32 lg:pb-20 bg-zinc-50 px-3 sm:px-6">
       <div className="max-w-7xl mx-auto">
+        
+        {/* Unified Mobile Dashboard Container (lg:hidden) */}
+        <div className="lg:hidden bg-white rounded-2xl border border-zinc-100 shadow-sm overflow-hidden mb-3.5 p-3.5">
+          <div className="flex items-center justify-between gap-3 pb-2.5 border-b border-zinc-100 mb-2.5">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 bg-brand-dark rounded-lg flex items-center justify-center shrink-0 shadow-sm">
+                <UserIcon className="text-white w-3.5 h-3.5" />
+              </div>
+              <div className="min-w-0">
+                <h2 className="text-xs sm:text-sm font-black text-zinc-900 leading-tight truncate">{profile?.name}</h2>
+                <p className="text-zinc-400 text-[9px] sm:text-[10px] truncate max-w-[140px] xs:max-w-[180px]">{profile?.email}</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-1.5 shrink-0">
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-zinc-50 text-[8px] font-black tracking-wider text-brand-dark uppercase rounded border border-zinc-200">
+                {profile?.role}
+              </span>
+              <button 
+                onClick={handleLogout}
+                className="p-1.5 bg-red-50 hover:bg-red-100 text-red-650 rounded-lg transition-all active:scale-90"
+                title="Logout"
+              >
+                <LogOut className="w-3 h-3" />
+              </button>
+            </div>
+          </div>
+
+          {/* Segmented Tab Switcher - Seamlessly Integrated */}
+          <div className="bg-zinc-50 p-0.5 rounded-lg grid grid-cols-2 gap-1 text-center font-bold">
+            <button
+              onClick={() => setActiveTab('my-ads')}
+              className={`py-1.5 rounded-md text-[10px] sm:text-[11px] transition-all flex items-center justify-center gap-1.5 ${
+                activeTab === 'my-ads' 
+                  ? 'bg-brand-dark text-white shadow-sm' 
+                  : 'text-zinc-500 hover:bg-zinc-100'
+              }`}
+            >
+              <LayoutDashboard className="w-3.5 h-3.5" /> My Ads ({ads.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('profile')}
+              className={`py-1.5 rounded-md text-[10px] sm:text-[11px] transition-all flex items-center justify-center gap-1.5 ${
+                activeTab === 'profile' 
+                  ? 'bg-brand-dark text-white shadow-sm' 
+                  : 'text-zinc-500 hover:bg-zinc-100'
+              }`}
+            >
+              <Settings className="w-3.5 h-3.5" /> Settings
+            </button>
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <div className="lg:col-span-1 space-y-6">
+          {/* Desktop Sidebar (Hidden on Mobile/Tablet) */}
+          <div className="hidden lg:block lg:col-span-1 space-y-6">
             <div className="bg-white p-8 rounded-[40px] border border-zinc-100 shadow-sm text-center">
               <div className="w-24 h-24 bg-brand-dark rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-brand-dark/20">
                 <UserIcon className="text-white w-12 h-12" />
@@ -86,7 +139,7 @@ export const UserDashboard = () => {
                 {profile?.role} Account
               </div>
             </div>
-
+ 
             <div className="bg-white p-4 rounded-[40px] border border-zinc-100 shadow-sm space-y-2">
               <button 
                 onClick={() => setActiveTab('my-ads')}
@@ -119,62 +172,95 @@ export const UserDashboard = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                 >
-                  <div className="flex items-center justify-between mb-8">
-                    <h1 className="text-3xl font-black">My Ads</h1>
-                    <Link to="/post-ad" className="bg-brand-dark text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 hover:bg-brand-primary transition-all shadow-lg shadow-brand-dark/20">
-                      <Plus className="w-5 h-5" /> Post New Ad
+                  <div className="flex items-center justify-between mb-3.5 sm:mb-8">
+                    <h1 className="text-base sm:text-3xl font-black hidden sm:block">My Ads</h1>
+                    <Link to="/post-ad" className="w-full sm:w-auto justify-center bg-brand-dark text-white px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-base flex items-center gap-1.5 sm:gap-2 hover:bg-brand-primary transition-all shadow-md shadow-brand-dark/15 active:scale-95">
+                      <Plus className="w-4 h-4 sm:w-5 sm:h-5" /> Post New Ad
                     </Link>
                   </div>
 
                   {loading ? (
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {[1, 2, 3, 4].map(i => (
-                        <div key={i} className="bg-white h-[200px] rounded-[40px] animate-pulse border border-zinc-100" />
+                    <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                      {[1, 2].map(i => (
+                        <div key={i} className="bg-white h-[90px] sm:h-[200px] rounded-xl sm:rounded-[40px] animate-pulse border border-zinc-100" />
                       ))}
                     </div>
                   ) : ads.length > 0 ? (
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-6">
                       {ads.map(ad => (
-                        <div key={ad.id} className="bg-white rounded-[40px] overflow-hidden border border-zinc-100 shadow-sm group hover:shadow-xl transition-all duration-500">
-                          <div className="flex">
-                            <div className="w-1/3 aspect-square relative overflow-hidden">
-                              <img src={ad.images[0]} alt={ad.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                        <div key={ad.id} className="bg-white rounded-xl sm:rounded-[40px] overflow-hidden border border-zinc-100 shadow-sm group hover:shadow-md transition-all duration-300">
+                          {/* Desktop/Tablet Layout */}
+                          <div className="hidden sm:flex">
+                            <div className="w-1/3 aspect-square relative overflow-hidden bg-zinc-50 shrink-0">
+                              <img src={ad.images[0]} alt={ad.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                             </div>
-                            <div className="w-2/3 p-6 flex flex-col justify-between">
+                            <div className="w-2/3 p-4 sm:p-6 flex flex-col justify-between min-w-0">
                               <div>
-                                <div className="flex justify-between items-start mb-2">
+                                <div className="flex justify-between items-start mb-2 gap-1 flex-wrap">
                                   <StatusBadge status={ad.status} />
-                                  <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">
+                                  <p className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider">
                                     {formatDistanceToNow(ad.createdAt?.toDate() || new Date())} ago
                                   </p>
                                 </div>
-                                <h3 className="font-bold text-lg mb-1 line-clamp-1">{ad.title}</h3>
-                                <p className="text-brand-dark font-black text-xl">LKR {ad.price.toLocaleString()}</p>
+                                <h3 className="font-bold text-sm sm:text-lg text-zinc-900 mb-1 line-clamp-1">{ad.title}</h3>
+                                <p className="text-brand-dark font-black text-base sm:text-xl">LKR {ad.price.toLocaleString()}</p>
                               </div>
                               <div className="flex gap-2 mt-4">
-                                <button className="flex-1 bg-zinc-50 text-zinc-600 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-zinc-100 transition-all">
+                                <button className="flex-1 bg-zinc-50 text-zinc-650 py-2 sm:py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-zinc-100 transition-all">
                                   <Edit2 className="w-3.5 h-3.5" /> Edit
                                 </button>
                                 <button 
                                   onClick={() => handleDelete(ad.id)}
-                                  className="w-11 h-11 bg-red-50 text-red-500 rounded-xl flex items-center justify-center hover:bg-red-500 hover:text-white transition-all"
+                                  className="w-10 h-10 bg-red-50 text-red-500 rounded-xl flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shrink-0"
                                 >
                                   <Trash2 className="w-4 h-4" />
                                 </button>
                               </div>
                             </div>
                           </div>
+
+                          {/* Mobile-Only Micro List Row (Fits perfectly on standard screens to allow "one view" dashboard tracking) */}
+                          <div className="flex sm:hidden items-center p-2.5 gap-3">
+                            <div className="w-12 h-12 rounded-lg overflow-hidden bg-zinc-50 shrink-0 border border-zinc-100">
+                              <img src={ad.images[0]} alt={ad.title} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-[11px] font-black text-zinc-900 truncate leading-snug">{ad.title}</h4>
+                              <p className="text-brand-dark font-black text-[11px] mt-0.5">LKR {ad.price.toLocaleString()}</p>
+                              <div className="flex items-center gap-1.5 mt-0.5">
+                                <span className={`text-[8px] font-extrabold uppercase tracking-widest px-1 rounded ${
+                                  ad.status === 'approved' ? 'bg-emerald-50 text-emerald-655 border border-emerald-100' :
+                                  ad.status === 'rejected' ? 'bg-red-50 text-red-655 border border-red-100' : 'bg-amber-50 text-amber-655 border border-amber-100'
+                                }`}>
+                                  {ad.status}
+                                </span>
+                                <span className="text-[8px] text-zinc-400 font-medium font-mono">{formatDistanceToNow(ad.createdAt?.toDate() || new Date())} ago</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1 shrink-0">
+                              <button className="p-1.5 bg-zinc-50 hover:bg-zinc-100 text-zinc-550 rounded-lg active:scale-90 transition-all" title="Edit">
+                                <Edit2 className="w-3 h-3" />
+                              </button>
+                              <button 
+                                onClick={() => handleDelete(ad.id)}
+                                className="p-1.5 bg-red-50 hover:bg-red-100 text-red-550 rounded-lg active:scale-90 transition-all"
+                                title="Delete"
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="bg-white p-20 rounded-[40px] border border-dashed border-zinc-200 text-center">
-                      <div className="w-20 h-20 bg-zinc-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <LayoutDashboard className="text-zinc-300 w-10 h-10" />
+                    <div className="bg-white p-6 sm:p-20 rounded-2xl sm:rounded-[40px] border border-dashed border-zinc-200 text-center">
+                      <div className="w-12 h-12 bg-zinc-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <LayoutDashboard className="text-zinc-350 w-6 h-6" />
                       </div>
-                      <h3 className="text-xl font-bold text-zinc-900 mb-2">No ads yet</h3>
-                      <p className="text-zinc-500 mb-8">Start selling today by posting your first ad!</p>
-                      <Link to="/post-ad" className="text-brand-dark font-bold hover:underline">Post your first ad</Link>
+                      <h3 className="text-sm sm:text-xl font-bold text-zinc-900 mb-1">No ads yet</h3>
+                      <p className="text-zinc-500 text-[11px] sm:text-xs mb-3">Start selling today by posting your first ad!</p>
+                      <Link to="/post-ad" className="text-brand-dark text-[11px] sm:text-sm font-bold hover:underline">Post your first ad</Link>
                     </div>
                   )}
                 </motion.div>
@@ -184,28 +270,28 @@ export const UserDashboard = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  className="bg-white p-10 rounded-[40px] border border-zinc-100 shadow-sm"
+                  className="bg-white p-4 sm:p-10 rounded-2xl sm:rounded-[40px] border border-zinc-100 shadow-sm"
                 >
-                  <h1 className="text-3xl font-black mb-8">Profile Settings</h1>
-                  <div className="space-y-8 max-w-xl">
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider ml-1">Full Name</label>
+                  <h1 className="text-base sm:text-3xl font-black mb-4 sm:mb-8 hidden sm:block">Profile Settings</h1>
+                  <div className="space-y-3.5 sm:space-y-8 max-w-xl">
+                    <div className="space-y-1 sm:space-y-2">
+                      <label className="text-[10px] sm:text-xs font-bold text-zinc-400 text-left block uppercase tracking-wider ml-1">Full Name</label>
                       <input 
                         type="text" 
                         defaultValue={profile?.name}
-                        className="w-full px-6 py-4 bg-zinc-50 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 transition-all"
+                        className="w-full px-3.5 py-2 sm:px-6 sm:py-4 bg-zinc-50 rounded-lg sm:rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 transition-all text-xs sm:text-sm"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider ml-1">Email Address</label>
+                    <div className="space-y-1 sm:space-y-2">
+                      <label className="text-[10px] sm:text-xs font-bold text-zinc-400 text-left block uppercase tracking-wider ml-1">Email Address</label>
                       <input 
                         type="email" 
                         disabled
                         defaultValue={profile?.email}
-                        className="w-full px-6 py-4 bg-zinc-100 rounded-2xl border border-zinc-200 text-zinc-500 cursor-not-allowed"
+                        className="w-full px-3.5 py-2 sm:px-6 sm:py-4 bg-zinc-100 rounded-lg sm:rounded-2xl border border-zinc-200 text-zinc-500 cursor-not-allowed text-xs sm:text-sm"
                       />
                     </div>
-                    <button className="bg-brand-dark text-white px-10 py-4 rounded-2xl font-bold hover:bg-brand-primary transition-all shadow-lg shadow-brand-dark/20">
+                    <button className="w-full sm:w-auto bg-brand-dark text-white px-5 py-2.5 sm:px-10 sm:py-4 rounded-lg sm:rounded-2xl font-bold text-xs sm:text-base hover:bg-brand-primary transition-all shadow-md shadow-brand-dark/10 active:scale-95">
                       Save Changes
                     </button>
                   </div>
