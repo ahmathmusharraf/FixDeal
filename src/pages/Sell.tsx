@@ -94,46 +94,49 @@ export const Sell = () => {
   }
 
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-zinc-50">
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-start">
-        <div>
-          <h1 className="font-display text-5xl md:text-6xl font-extrabold leading-tight mb-8">
-            Sell your items for the <span className="text-brand-dark">best price</span> in Sri Lanka
+    <div className="pt-24 pb-12 sm:pt-32 sm:pb-20 min-h-screen bg-zinc-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 lg:gap-20 items-start">
+        <div className="text-center lg:text-left">
+          <span className="inline-block px-3 py-1 bg-brand-dark/10 text-brand-dark text-[10px] font-black uppercase tracking-wider rounded-full mb-3">
+            Quick Selling
+          </span>
+          <h1 className="font-display text-2xl sm:text-4xl lg:text-6xl font-extrabold leading-tight mb-3 sm:mb-6">
+            Sell your items for the <span className="text-brand-dark">best price</span>
           </h1>
-          <p className="text-lg text-zinc-600 mb-12 leading-relaxed">
-            Get a quick, fair, and transparent evaluation for your items. We handle all the paperwork and ensure a hassle-free transaction.
+          <p className="text-sm sm:text-base lg:text-lg text-zinc-650 mb-6 lg:mb-12 max-w-xl mx-auto lg:mx-0">
+            Get a quick, fair, and transparent evaluation. We handle all the representation and guide you to a hassle-free transaction.
           </p>
 
-          <div className="space-y-8">
+          <div className="hidden sm:space-y-6 sm:block">
             {[
               { icon: DollarSign, title: 'Best Market Price', desc: 'We offer competitive prices based on real-time market data.' },
               { icon: ShieldCheck, title: 'Safe & Secure', desc: 'Verified transactions and secure payment on delivery.' },
               { icon: Clock, title: 'Quick Process', desc: 'Get an offer within 24 hours and sell your items in days.' }
             ].map((item, i) => (
-              <div key={i} className="flex gap-6">
-                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center shrink-0">
-                  <item.icon className="text-brand-dark w-6 h-6" />
+              <div key={i} className="flex gap-4 text-left">
+                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center shrink-0">
+                  <item.icon className="text-brand-dark w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg mb-1">{item.title}</h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed">{item.desc}</p>
+                  <h3 className="font-bold text-sm mb-0.5">{item.title}</h3>
+                  <p className="text-zinc-500 text-xs leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-white p-6 md:p-10 rounded-[32px] md:rounded-[40px] shadow-xl border border-zinc-100">
-          <h2 className="text-2xl font-bold mb-8">Item Details</h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-zinc-700">Category</label>
+        <div className="bg-white p-4 sm:p-8 lg:p-10 rounded-2xl sm:rounded-[32px] md:rounded-[40px] shadow-md border border-zinc-100">
+          <h2 className="text-lg sm:text-2xl font-bold mb-4 sm:mb-8 text-zinc-900">Item Details</h2>
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1 sm:space-y-2">
+                <label className="text-xs sm:text-sm font-bold text-zinc-700">Category</label>
                 <div className="relative">
                   <select 
                     required 
                     defaultValue=""
-                    className="w-full px-4 py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 cursor-pointer appearance-none text-zinc-700"
+                    className="w-full px-4 py-2.5 sm:py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 cursor-pointer appearance-none text-zinc-700 text-sm"
                   >
                     <option value="" disabled hidden>Select Category</option>
                     <option value="Electronics">Electronics</option>
@@ -147,30 +150,34 @@ export const Sell = () => {
                   </div>
                 </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-zinc-700">Item Name</label>
-                <input required type="text" placeholder="e.g. iPhone 15 Pro" className="w-full px-4 py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20" />
+              <div className="space-y-1 sm:space-y-2">
+                <label className="text-xs sm:text-sm font-bold text-zinc-700">Item Name</label>
+                <input required type="text" placeholder="e.g. iPhone 15 Pro" className="w-full px-4 py-2.5 sm:py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 text-sm" />
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-zinc-700">Year</label>
-                <input required type="number" placeholder="2022" className="w-full px-4 py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20" />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1 sm:space-y-2">
+                <label className="text-xs sm:text-sm font-bold text-zinc-700">Year</label>
+                <input required type="number" placeholder="2022" className="w-full px-4 py-2.5 sm:py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 text-sm" />
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-zinc-700">Mileage (KM)</label>
-                <input required type="number" placeholder="45000" className="w-full px-4 py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20" />
+              <div className="space-y-1 sm:space-y-2">
+                <label className="text-xs sm:text-sm font-bold text-zinc-700">Mileage (KM)</label>
+                <input required type="number" placeholder="45000" className="w-full px-4 py-2.5 sm:py-3 bg-zinc-50 rounded-xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-brand-dark/20 text-sm" />
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-1 sm:space-y-2">
               <div className="flex justify-between items-center">
-                <label className="text-sm font-bold text-zinc-700">Upload Photos</label>
-                <span className="text-xs text-zinc-500 font-medium">{images.length}/5 photos</span>
+                <label className="text-xs sm:text-sm font-bold text-zinc-700">Upload Photos</label>
+                <span className="text-[10px] sm:text-xs text-zinc-400 font-medium">{images.length}/5 photos</span>
               </div>
 
               {/* Hidden file input */}
+              <input
+                type="input" // Using as a file input trigger natively
+                style={{ display: 'none' }}
+              />
               <input
                 type="file"
                 ref={fileInputRef}
@@ -185,17 +192,17 @@ export const Sell = () => {
                   onClick={() => fileInputRef.current?.click()}
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
-                  className="border-2 border-dashed border-zinc-200 rounded-2xl p-8 text-center hover:border-brand-dark/50 hover:bg-zinc-50/50 transition-all cursor-pointer group"
+                  className="border-2 border-dashed border-zinc-200 rounded-xl sm:rounded-2xl p-4 sm:p-8 text-center hover:border-brand-dark/50 hover:bg-zinc-50/50 transition-all cursor-pointer group"
                 >
-                  <Upload className="w-8 h-8 text-zinc-400 mx-auto mb-4 group-hover:text-brand-dark transition-colors" />
-                  <p className="text-sm font-semibold text-zinc-700">Click to upload or drag & drop</p>
-                  <p className="text-xs text-zinc-400 mt-1">Upload up to 5 photos of your item</p>
+                  <Upload className="w-6 h-6 sm:w-8 sm:h-8 text-zinc-400 mx-auto mb-2 sm:mb-4 group-hover:text-brand-dark transition-colors" />
+                  <p className="text-xs sm:text-sm font-semibold text-zinc-700">Click to upload or drag & drop</p>
+                  <p className="text-[10px] sm:text-xs text-zinc-450 mt-0.5">Upload up to 5 photos</p>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                <div className="space-y-3">
+                  <div className="grid grid-cols-5 gap-2">
                     {images.map((img, idx) => (
-                      <div key={img.id} className="relative aspect-square rounded-xl overflow-hidden border border-zinc-200 group bg-zinc-100">
+                      <div key={img.id} className="relative aspect-square rounded-lg overflow-hidden border border-zinc-200 group bg-zinc-100">
                         <img 
                           src={img.url} 
                           alt={`Uploaded ${idx + 1}`} 
@@ -204,14 +211,11 @@ export const Sell = () => {
                         <button
                           type="button"
                           onClick={() => removeImage(img.id, img.url)}
-                          className="absolute top-1 right-1 p-1 bg-black/60 hover:bg-red-600 text-white rounded-full backdrop-blur-sm transition-colors opacity-100"
+                          className="absolute top-0.5 right-0.5 p-1 bg-black/60 hover:bg-red-650 text-white rounded-full scale-75 sm:scale-100 transition-colors"
                           title="Remove photo"
                         >
-                          <X className="w-3.5 h-3.5" />
+                          <X className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
                         </button>
-                        <div className="absolute bottom-0 left-0 right-0 bg-black/40 text-white text-[9px] py-0.5 text-center font-bold tracking-wide backdrop-blur-[1px]">
-                          Slot {idx + 1}
-                        </div>
                       </div>
                     ))}
 
@@ -220,25 +224,24 @@ export const Sell = () => {
                         onClick={() => fileInputRef.current?.click()}
                         onDragOver={handleDragOver}
                         onDrop={handleDrop}
-                        className="border-2 border-dashed border-zinc-200 hover:border-brand-dark hover:bg-zinc-50/50 rounded-xl flex flex-col items-center justify-center cursor-pointer aspect-square p-2 group transition-all"
+                        className="border-2 border-dashed border-zinc-200 hover:border-brand-dark hover:bg-zinc-50/50 rounded-lg flex flex-col items-center justify-center cursor-pointer aspect-square p-1 group transition-all"
                       >
-                        <Upload className="w-5 h-5 text-zinc-400 mb-1 group-hover:text-brand-dark transition-colors" />
-                        <span className="text-[10px] font-bold text-zinc-600 text-center">Add Photo</span>
-                        <span className="text-[9px] text-zinc-400 mt-0.5">({5 - images.length} left)</span>
+                        <Upload className="w-4 h-4 text-zinc-400 group-hover:text-brand-dark transition-colors" />
+                        <span className="text-[8px] sm:text-[10px] font-bold text-zinc-650 text-center mt-0.5">Add</span>
                       </div>
                     )}
                   </div>
 
                   {images.length === 5 && (
-                    <p className="text-xs text-emerald-600 font-medium flex items-center gap-1 mt-1">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> All 5 photos added successfully!
+                    <p className="text-[10.5px] sm:text-xs text-emerald-600 font-medium flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Photos approved ready
                     </p>
                   )}
                 </div>
               )}
             </div>
 
-            <button type="submit" className="w-full bg-brand-dark text-white py-4 rounded-2xl font-bold hover:bg-brand-primary transition-all active:scale-95 shadow-xl shadow-brand-dark/20">
+            <button type="submit" className="w-full bg-brand-dark text-white py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-sm hover:bg-brand-primary transition-all active:scale-95 shadow-lg shadow-brand-dark/10">
               Submit for Evaluation
             </button>
           </form>
