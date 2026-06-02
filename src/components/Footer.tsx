@@ -11,9 +11,10 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-zinc-900 text-white pt-20 pb-10">
+    <footer className="bg-zinc-900 text-white pt-10 pb-24 md:pt-20 md:pb-10">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        {/* Desktop View */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-6">
               <div className="flex items-center justify-center">
@@ -94,7 +95,58 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="pt-10 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6 text-zinc-500 text-xs text-center md:text-left">
+        {/* Mobile Micro One-View Footer */}
+        <div className="md:hidden flex flex-col items-center text-center space-y-4 py-2">
+          {/* Logo Brand Row */}
+          <div className="flex items-center gap-2">
+            <img 
+              src="https://raw.githubusercontent.com/ahmathmusharraf/FixDeal/refs/heads/main/Fix1.png" 
+              alt="FIX DEAL Logo" 
+              className="w-7 h-7 object-contain"
+              referrerPolicy="no-referrer"
+            />
+            <span className="font-display font-bold text-lg tracking-tight">
+              FIX<span className="text-brand-accent">DEAL</span>
+            </span>
+          </div>
+
+          {/* Inline Navigation Links */}
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[10px] text-zinc-400 font-black uppercase tracking-wider">
+            <Link to="/buy" className="hover:text-white transition-colors active:text-white">Buy</Link>
+            <Link to="/sell" className="hover:text-white transition-colors active:text-white">Sell</Link>
+            <Link to="/rent" className="hover:text-white transition-colors active:text-white">Rent</Link>
+            <Link to="/help" className="hover:text-white transition-colors active:text-white">Help</Link>
+            <Link to="/contact" className="hover:text-white transition-colors active:text-white">Contact</Link>
+            <Link to="/terms" className="hover:text-white transition-colors active:text-white">Terms</Link>
+          </div>
+
+          {/* Inline Social Buttons */}
+          <div className="flex gap-2.5">
+            {socialLinks.map((social) => (
+              <a 
+                key={social.label} 
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-zinc-700 active:bg-zinc-700 transition-all cursor-pointer"
+                aria-label={social.label}
+              >
+                <social.icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
+
+          {/* Micro Aligned Copyright Area */}
+          <div className="w-full pt-4 border-t border-zinc-800/60 text-[9px] text-zinc-550 space-y-1">
+            <p>2026 © FIX DEAL. All rights reserved.</p>
+            <p>
+              Website created by: <a href="https://mushieditz.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-zinc-450 hover:text-white transition-colors font-semibold">Mushi Editz</a>
+            </p>
+          </div>
+        </div>
+
+        {/* Desktop Copyright Area Only */}
+        <div className="hidden md:flex pt-10 border-t border-zinc-800 flex-row items-center justify-between gap-6 text-zinc-500 text-xs">
           <div className="space-y-2">
             <p>2026 © FIX DEAL. All rights reserved.</p>
             <p>
