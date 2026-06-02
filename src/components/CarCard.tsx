@@ -48,15 +48,15 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
           </Link>
           <button 
             onClick={toggleFavorite}
-            className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md transition-all z-10 ${isFavorite ? 'bg-red-500 text-white shadow-lg shadow-red-500/30' : 'bg-white/20 text-white hover:bg-white/40'}`}
+            className={`absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center backdrop-blur-md transition-all z-10 ${isFavorite ? 'bg-red-500 text-white shadow-lg shadow-red-500/30' : 'bg-black/40 text-white hover:bg-black/60'}`}
           >
-            <Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
+            <Heart className={`w-4 h-4 sm:w-5 sm:h-5 ${isFavorite ? 'fill-current' : ''}`} />
           </button>
           <button 
-            onClick={(e) => { e.preventDefault(); setShowQuickView(true); }}
-            className="absolute bottom-4 left-4 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-all flex items-center gap-2 hover:bg-white/40"
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowQuickView(true); }}
+            className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-[#1f1926]/90 backdrop-blur-md text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[9px] sm:text-xs font-black uppercase tracking-wider flex items-center gap-1.5 hover:bg-brand-primary transition-all z-10 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 shadow-lg shadow-black/20"
           >
-            <Eye className="w-3.5 h-3.5" /> Quick View
+            <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> Quick View
           </button>
         </div>
         <div className="p-3 sm:p-5 flex flex-col flex-grow">
@@ -130,7 +130,7 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
       {/* Quick View Modal */}
       <AnimatePresence>
         {showQuickView && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -142,73 +142,80 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-[40px] overflow-hidden shadow-2xl"
+              className="relative w-full max-w-sm md:max-w-2xl bg-white rounded-[24px] md:rounded-[40px] overflow-hidden shadow-2xl z-10"
             >
               <button 
                 onClick={() => setShowQuickView(false)}
-                className="absolute top-6 right-6 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center z-10 hover:bg-white transition-colors"
+                className="absolute top-3 right-3 md:top-6 md:right-6 w-8 h-8 md:w-10 md:h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center z-20 hover:bg-white border border-zinc-200 shadow-sm transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 md:w-5 md:h-5 text-zinc-600" />
               </button>
               
               <div className="grid md:grid-cols-2">
-                <div className="aspect-square md:aspect-auto">
+                <div className="relative h-44 md:h-auto overflow-hidden bg-zinc-100">
                   <img 
                     src={car.image} 
                     alt={car.model} 
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
                   />
+                  {/* Price overlay on mobile */}
+                  <div className="absolute bottom-3 left-3 md:hidden bg-[#1f1926]/90 backdrop-blur-md px-3 py-1.5 rounded-xl text-white font-black text-xs">
+                    LKR {car.price.toLocaleString()}
+                  </div>
                 </div>
-                <div className="p-8">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h2 className="text-2xl font-black mb-1">{car.brand} {car.model}</h2>
-                      <p className="text-zinc-500 font-medium text-sm">{car.trim} • {car.spec}</p>
+                <div className="p-5 md:p-8 flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between items-start mb-3">
+                      <div>
+                        <h2 className="text-base md:text-2xl font-black text-zinc-900 leading-snug">{car.brand} {car.model}</h2>
+                        <p className="text-zinc-500 font-bold text-[10px] md:text-sm mt-0.5">{car.trim} • {car.spec}</p>
+                      </div>
+                      <img src={car.logo} alt={car.brand} className="w-6 h-6 md:w-8 md:h-8 object-contain shrink-0" referrerPolicy="no-referrer" />
                     </div>
-                    <img src={car.logo} alt={car.brand} className="w-8 h-8 object-contain" referrerPolicy="no-referrer" />
+
+                    <div className="grid grid-cols-2 gap-2 mb-4">
+                      <div className="bg-zinc-50 p-2.5 rounded-xl border border-zinc-200">
+                        <p className="text-[8px] md:text-[10px] text-zinc-400 font-extrabold uppercase tracking-wide mb-0.5">Year</p>
+                        <p className="font-extrabold text-zinc-850 text-xs md:text-sm">{car.year}</p>
+                      </div>
+                      <div className="bg-zinc-50 p-2.5 rounded-xl border border-zinc-200">
+                        <p className="text-[8px] md:text-[10px] text-zinc-400 font-extrabold uppercase tracking-wide mb-0.5">
+                          {car.category === 'Mobile Phone' ? 'Battery' : car.category === 'Electronics' ? 'Condition' : 'Mileage'}
+                        </p>
+                        <p className="font-extrabold text-zinc-850 text-xs md:text-sm">
+                          {car.category === 'Mobile Phone' ? `${car.mileage}% Health` : car.category === 'Electronics' ? `${car.mileage}% Cond.` : `${car.mileage.toLocaleString()} KM`}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Desktop Only Price */}
+                    <div className="hidden md:block mb-6">
+                      <p className="text-[10px] text-zinc-400 font-extrabold uppercase tracking-wide mb-1">Price</p>
+                      <p className="text-3xl font-black text-[#1f1926]">LKR {car.price.toLocaleString()}</p>
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 mb-8">
-                    <div className="bg-zinc-50 p-4 rounded-2xl">
-                      <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mb-1">Year</p>
-                      <p className="font-bold text-sm">{car.year}</p>
-                    </div>
-                    <div className="bg-zinc-50 p-4 rounded-2xl">
-                      <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mb-1">
-                        {car.category === 'Mobile Phone' ? 'Battery' : car.category === 'Electronics' ? 'Condition' : 'Mileage'}
-                      </p>
-                      <p className="font-bold text-sm">
-                        {car.category === 'Mobile Phone' ? `${car.mileage}% Health` : car.category === 'Electronics' ? `${car.mileage}% Condition` : `${car.mileage.toLocaleString()} KM`}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mb-8">
-                    <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mb-1">Price</p>
-                    <p className="text-3xl font-black text-brand-dark">LKR {car.price.toLocaleString()}</p>
-                  </div>
-
-                  <div className="flex flex-col gap-3">
+                  <div className="space-y-2 mt-2 md:mt-0">
                     <Link 
                       to={`/car/${car.id}`}
-                      className="w-full bg-brand-dark text-white py-4 rounded-2xl font-bold text-center hover:bg-brand-primary transition-all"
+                      className="w-full bg-[#1f1926] hover:bg-brand-primary active:scale-95 text-white py-2.5 md:py-3.5 rounded-xl font-bold text-center block text-xs md:text-sm shadow-md transition-all uppercase tracking-wider"
                       onClick={() => setShowQuickView(false)}
                     >
                       View Full Details
                     </Link>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2">
                       <a 
                         href="tel:+971502316225"
-                        className="bg-zinc-100 text-brand-dark py-3 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all"
+                        className="bg-zinc-100 text-zinc-700 hover:bg-zinc-200 py-2 rounded-xl font-bold text-[10px] md:text-xs flex items-center justify-center gap-1.5 transition-all text-center"
                       >
-                        <Phone className="w-4 h-4 fill-current" /> Call
+                        <Phone className="w-3.5 h-3.5 fill-current text-zinc-500" /> Call
                       </a>
                       <button 
                         onClick={() => window.open('https://wa.me/971502316225', '_blank')}
-                        className="bg-zinc-100 text-brand-dark py-3 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-zinc-200 transition-all"
+                        className="bg-emerald-50 text-emerald-800 hover:bg-emerald-100 py-2 rounded-xl font-bold text-[10px] md:text-xs flex items-center justify-center gap-1.5 transition-all border border-emerald-150"
                       >
-                        <MessageCircle className="w-4 h-4 fill-current" /> Chat
+                        <MessageCircle className="w-3.5 h-3.5 fill-current text-emerald-600" /> WhatsApp
                       </button>
                     </div>
                   </div>
